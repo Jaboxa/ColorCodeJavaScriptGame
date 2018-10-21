@@ -16,14 +16,25 @@ for (var i = 0; i < modeButtons.length; i++) {
 		modeButtons[0].classList.remove("selected");
 		modeButtons[1].classList.remove("selected");
 		modeButtons[2].classList.remove("selected");
+		modeButtons[3].classList.remove("selected");
+		modeButtons[4].classList.remove("selected");
+		modeButtons[5].classList.remove("selected");
 		this.classList.add("selected");
 		//this.textContent === "EASY" ? numSquares = 3: numSquares = 6; use if only two 
 		if(this.textContent === "EASY"){
 			numSquares = 3;
-		}else if (this.textContent === "HARD"){
+		}else if (this.textContent === "MEDIUM"){
 			numSquares = 6;
-		}else
+		}else if (this.textContent === "HARD"){
 			numSquares = 9;
+			//try making the blocks smaller when more of them. tried for an hour and it got all crazy so stopping now
+			//why always three squares of different sizes? or superthin and then i cant change back
+		}else if (this.textContent === "SUPER"){
+			numSquares = 20;
+		}else if (this.textContent === "MEGA"){
+			numSquares = 36;
+		}else
+			numSquares = 100;
 		reset()
 		;
 	});
