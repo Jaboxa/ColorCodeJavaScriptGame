@@ -9,31 +9,59 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var modeButtons = document.querySelectorAll(".mode");
 
-//forloop highlighting selected button, and deciding the right amount of
+setUpModeButtons();
+setUpSquares();
+
+
+//function highlighting selected button, and deciding the right amount of
 //squares depending on mode and then running the reset() function.
-for (var i = 0; i < modeButtons.length; i++) {
-	modeButtons[i].addEventListener("click", function(){
-		for (var i = 0; i < modeButtons.length; i++) {
-			modeButtons[i].classList.remove("selected");
-		}
-		this.classList.add("selected");
-		//this.textContent === "EASY" ? numSquares = 3: numSquares = 6; use if only two 
-		if(this.textContent === "EASY"){
-			numSquares = 3;
-		}else if (this.textContent === "MEDIUM"){
-			numSquares = 6;
-		}else if (this.textContent === "HARD"){
-			numSquares = 9;
-			//try making the blocks smaller when more of them. tried for an hour and it got all crazy so stopping now
-			//why always three squares of different sizes? or superthin and then i cant change back
-		}else if (this.textContent === "SUPER"){
-			numSquares = 20;
-		}else if (this.textContent === "MEGA"){
-			numSquares = 36;
-		}else
-			numSquares = 100;
-		reset();
-	});
+function setUpModeButtons(){
+	for (var i = 0; i < modeButtons.length; i++) {
+		modeButtons[i].addEventListener("click", function(){
+			for (var i = 0; i < modeButtons.length; i++) {
+				modeButtons[i].classList.remove("selected");
+			}
+			this.classList.add("selected");
+			//this.textContent === "EASY" ? numSquares = 3: numSquares = 6; use if only two 
+			if(this.textContent === "EASY"){
+				numSquares = 3;
+			}else if (this.textContent === "MEDIUM"){
+				numSquares = 6;
+			}else if (this.textContent === "HARD"){
+				numSquares = 9;
+				//try making the blocks smaller when more of them. tried for an hour and it got all crazy so stopping now
+				//why always three squares of different sizes? or superthin and then i cant change back
+			}else if (this.textContent === "SUPER"){
+				numSquares = 20;
+			}else if (this.textContent === "MEGA"){
+				numSquares = 36;
+			}else
+				numSquares = 100;
+			reset();
+		});
+	};
+};
+
+//function setting the selected colors to the squares. the click function on the squares selects the clicked square and compares the color on the
+//square with the selected winningColor. If there is a match the changeColor function runs to turn all the squares to the winning color.
+//The message text changes to "correct" and the resetButtons text changes to "play again?"
+function setUpSquares(){
+	for (var i = 0; i < squares.length; i++) {
+		squares[i].style.backgroundColor = colors[i];
+		squares[i].addEventListener("click",function(){
+			clickedColor = this.style.backgroundColor;
+			if(clickedColor === winningColor){
+				console.log(clickedColor,winningColor + "winner");
+				message.textContent = "Correct!";
+				resetButton.textContent = "Play again?";
+				changeColor(clickedColor);
+			} else { 
+				console.log(clickedColor,winningColor + "no");
+				this.style.backgroundColor = "#232323";
+				message.textContent = "Try again";
+			}
+		});
+	};
 };
 //reset function that will generate random colors, pick a winning color, change message
 //change resetButtons text and a forloop that will select all squares and assign them a 
@@ -63,25 +91,7 @@ resetButton.addEventListener("click", function(){
 //Sets the colorcode in the h1 to the winningColor, i.e. the colorcode people are going to try to decipher.
 colorCode.textContent = winningColor;
 
-//forloop setting the selected colors to the squares. the click function on the squares selects the clicked square and compares the color on the
-//square with the selected winningColor. If there is a match the changeColor function runs to turn all the squares to the winning color.
-//The message text changes to "correct" and the resetButtons text changes to "play again?"
-for (var i = 0; i < squares.length; i++) {
-	squares[i].style.backgroundColor = colors[i];
-	squares[i].addEventListener("click",function(){
-		clickedColor = this.style.backgroundColor;
-		if(clickedColor === winningColor){
-			console.log(clickedColor,winningColor + "winner");
-			message.textContent = "Correct!";
-			resetButton.textContent = "Play again?";
-			changeColor(clickedColor);
-		} else { 
-			console.log(clickedColor,winningColor + "no");
-			this.style.backgroundColor = "#232323";
-			message.textContent = "Try again";
-		}
-	});
-};
+
 //function that changes the color of all the squares in play to the winning color when it is chosen. 
 //the if/else is there so there is only six squares displayed the first time you win (otherwise all nine are shown).
 function changeColor(color){
