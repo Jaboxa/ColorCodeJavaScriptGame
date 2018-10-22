@@ -13,12 +13,9 @@ var modeButtons = document.querySelectorAll(".mode");
 //squares depending on mode and then running the reset() function.
 for (var i = 0; i < modeButtons.length; i++) {
 	modeButtons[i].addEventListener("click", function(){
-		modeButtons[0].classList.remove("selected");
-		modeButtons[1].classList.remove("selected");
-		modeButtons[2].classList.remove("selected");
-		modeButtons[3].classList.remove("selected");
-		modeButtons[4].classList.remove("selected");
-		modeButtons[5].classList.remove("selected");
+		for (var i = 0; i < modeButtons.length; i++) {
+			modeButtons[i].classList.remove("selected");
+		}
 		this.classList.add("selected");
 		//this.textContent === "EASY" ? numSquares = 3: numSquares = 6; use if only two 
 		if(this.textContent === "EASY"){
@@ -35,8 +32,7 @@ for (var i = 0; i < modeButtons.length; i++) {
 			numSquares = 36;
 		}else
 			numSquares = 100;
-		reset()
-		;
+		reset();
 	});
 };
 //reset function that will generate random colors, pick a winning color, change message

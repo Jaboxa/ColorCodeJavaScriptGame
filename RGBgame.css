@@ -4,9 +4,16 @@ body{
 	margin: 0;
 	font-family: "Montserrat", "Avenir";
 }
+#container{
+	height: 100%
+	width:100%;
+	max-width: 600px;
+	max-height: 600px;
+	margin: 20px auto;
+}
 .square{
 	width: 30%;
-	height: 30%
+	height: 30%;
 	background-color: #232323;
 	padding-bottom: 30%;
 	float:left;
@@ -15,10 +22,7 @@ body{
 	--webkit-transition: background 0.5s ;
 	--moz-transition: background 0.5s ;
 }
-#container{
-	max-width: 600px;
-	margin: 20px auto;
-}
+
 h1{
 	padding: 20px 0;
 	color: white;
